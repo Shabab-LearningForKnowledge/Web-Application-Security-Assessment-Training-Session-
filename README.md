@@ -148,12 +148,12 @@ Security testing may include:
 Two-Tier Architecture
 
 In a two-tier architecture, the client communicates directly with the application or database layer.
-
+```
 +-------------+       +----------------------+
 |   Client    | <---> | Application/Database |
 |   Browser   |       |       Server         |
 +-------------+       +----------------------+
-
+```
 Potential security concerns include:
 
 - Database credential exposure
@@ -170,7 +170,7 @@ A three-tier architecture separates the application into three major layers:
 1. Presentation Layer
 2. Application Layer
 3. Data Layer
-
+```
 +-------------------+
 | Presentation      |
 | Layer             |
@@ -191,11 +191,11 @@ A three-tier architecture separates the application into three major layers:
 | Database          |
 | MySQL/PostgreSQL  |
 +-------------------+
-
+```
 N-Tier Architecture
 
 Modern applications can contain many additional components.
-
+```
 User
  |
  v
@@ -223,7 +223,7 @@ Database          Database
  |
  v
 Cache / Storage
-
+```
 Modern applications may use:
 
 - Microservices
@@ -281,7 +281,7 @@ What Is an Attack Vector?
 An attack vector is the method or technique used to attack or exploit an entry point.
 
 For example:
-
+```
 Attack Surface             Attack Vector
 
 Login Page          -----> Brute Force
@@ -295,7 +295,7 @@ API Endpoint        -----> IDOR / BOLA
 Password Reset      -----> Token Manipulation
 
 Payment Function    -----> Price Manipulation
-
+```
 Easy Definition
 
 «Attack Vector = HOW can I attack?»
@@ -351,14 +351,14 @@ White Box| Extensive internal information and/or source code
 Gray-Box Example
 
 Black Box
-
+```
 Tester
   |
   | Very Limited Information
   v
 Application
-
-
+```
+```
 Gray Box
 
 Tester
@@ -369,8 +369,8 @@ Tester
   | User Roles
   v
 Application
-
-
+```
+```
 White Box
 
 Tester
@@ -380,11 +380,11 @@ Tester
   | Internal Documentation
   v
 Application
-
+```
 Gray-Box Assessment Approach
 
 A typical gray-box assessment can follow these steps:
-
+```
 1. Understand Scope
         |
         v
@@ -419,7 +419,7 @@ A typical gray-box assessment can follow these steps:
         |
         v
 12. Report
-
+```
 Step 1: Understand the Scope
 
 Before testing, identify what is authorized.
@@ -457,7 +457,7 @@ Try to understand:
 Step 3: Map the Application
 
 Identify important functionality.
-
+```
 Application
  |
  +-- Login
@@ -485,7 +485,7 @@ Application
  +-- Admin Panel
  |
  +-- Logout
-
+```
 This process helps identify the application's attack surface.
 
 ---
@@ -547,7 +547,7 @@ Burp allows a tester to inspect:
 Configuring Burp Suite With a Browser
 
 The purpose of configuring the browser with Burp Suite is to allow Burp to sit between the browser and the application.
-
+```
 Browser
    |
    | HTTP/HTTPS Request
@@ -564,7 +564,7 @@ Burp Suite
    |
    v
 Browser
-
+```
 A common Burp Proxy listener configuration is:
 
 127.0.0.1:8080
@@ -594,7 +594,7 @@ We can inspect:
 Burp Intercept
 
 When interception is enabled:
-
+```
 Browser
    |
    | HTTP Request
@@ -606,7 +606,7 @@ Burp Suite
    | Modify / Forward
    v
 Server
-
+```
 For example:
 
 GET /api/user/123 HTTP/1.1
@@ -616,7 +616,7 @@ Authorization: Bearer TOKEN
 A tester can analyze the request and test how the application handles controlled changes.
 
 For example:
-
+```
 User ID: 123
      |
      v
@@ -624,7 +624,7 @@ User ID: 124
      |
      v
 Compare Response
-
+```
 When performed against authorized test accounts, this can help identify authorization issues such as IDOR or BOLA.
 
 Burp HTTP History
@@ -867,7 +867,7 @@ Common examples include:
 Important Testing Question
 
 For every endpoint, ask:
-
+```
 Should authentication be required here?
               |
         +-----+-----+
@@ -877,7 +877,7 @@ Should authentication be required here?
    Test whether   Verify that
    authentication it is intentionally
    is enforced    public
-
+```
 Not every publicly accessible endpoint is vulnerable.
 
 The important question is whether the endpoint is supposed to be publicly accessible.
@@ -895,7 +895,7 @@ Easy Definition
 «Authentication = Who are you?»
 
 Authentication Flow
-
+```
 Username
     +
 Password
@@ -911,7 +911,7 @@ Valid Invalid
  |     |
  v     v
 Login  Reject
-
+```
 Authentication Functions to Test
 
 Important authentication-related functionality includes:
@@ -992,7 +992,7 @@ Easy Definition
 «Authorization = What are you allowed to do?»
 
 Authorization Flow
-
+```
 Authentication
       |
       v
@@ -1004,7 +1004,7 @@ Authorization
    +--+--+
    |     |
 Allowed Denied
-
+```
 Authentication vs Authorization
 
 Authentication| Authorization
@@ -1015,7 +1015,7 @@ Password / MFA| Role / ownership
 Happens before authorization| Happens after identity is established
 
 Example
-
+```
 Username + Password
         |
         v
@@ -1032,13 +1032,13 @@ Authorization
         +----> Another User's Profile? NO
         |
         +----> Admin Panel? NO
-
+```
 Horizontal Authorization
 
 Horizontal authorization issues occur when one user can access another user's resources at the same privilege level.
 
 Example:
-
+```
 User A
    |
    | /api/user/101
@@ -1051,7 +1051,7 @@ User A
    | /api/user/102
    v
 User B's Data
-
+```
 If User A can access User B's data without proper authorization, this may indicate an IDOR or BOLA vulnerability.
 
 Vertical Authorization
@@ -1059,7 +1059,7 @@ Vertical Authorization
 Vertical authorization issues occur when a lower-privileged user can access functionality intended for a higher-privileged user.
 
 Example:
-
+```
 Admin
  |
  +----> Admin Panel
@@ -1067,12 +1067,12 @@ Admin
  +----> Delete User
  |
  +----> Manage Roles
-
-
+```
+```
 Normal User
  |
  +----> Should NOT access Admin Functions
-
+```
 If a normal user can access administrative functionality, it may indicate vertical privilege escalation.
 
 Authorization Vulnerabilities
@@ -1124,7 +1124,7 @@ This means that the server does not automatically remember previous requests.
 Web applications therefore use sessions to remember an authenticated user.
 
 Session Flow
-
+```
 Browser
    |
    | Username + Password
@@ -1148,7 +1148,7 @@ Future Requests
    |
    v
 Server Identifies User
-
+```
 Cookie Example
 
 The server may send:
@@ -1215,7 +1215,7 @@ Session Fixation
 Session fixation may occur when an attacker can cause a victim to use a session identifier known to the attacker and the application does not properly regenerate the session after authentication.
 
 A secure approach is:
-
+```
 Before Login
 Session ID = A
       |
@@ -1228,23 +1228,23 @@ Session ID Regenerated
       v
 After Login
 Session ID = B
-
+```
 The session identifier should be properly regenerated after authentication.
 
 Session Invalidation
 
 Before logout:
-
+```
 Browser ---> Session ABC123 ---> Server
                      |
                    Valid
-
+```
 After logout:
-
+```
 Browser ---> Session ABC123 ---> Server
                      |
                   Invalid
-
+```
 The old session should no longer provide authenticated access after logout.
 
 Session Testing Checklist
@@ -1356,7 +1356,7 @@ The application should validate whether the quantity is logically valid.
 Coupon Abuse
 
 Normal workflow:
-
+```
 Apply Coupon
       |
       v
@@ -1364,9 +1364,9 @@ Validate Coupon
       |
       v
 Apply Discount
-
+```
 Potentially vulnerable workflow:
-
+```
 Apply Coupon
       |
       v
@@ -1374,7 +1374,7 @@ Discount Applied
       |
       v
 Coupon Reused Multiple Times
-
+```
 The server should enforce business rules such as:
 
 - Maximum usage
@@ -1387,13 +1387,13 @@ The server should enforce business rules such as:
 Workflow Bypass
 
 Suppose an application requires:
-
+```
 Step 1 -> Step 2 -> Step 3 -> Payment -> Confirmation
-
+```
 A tester may check whether Step 3 can be accessed directly without completing the required previous steps.
 
 Normal:
-
+```
 Step 1
   |
   v
@@ -1404,17 +1404,17 @@ Step 3
   |
   v
 Payment
-
+```
 
 Potential Bypass:
-
+```
 Step 1 ----X
 Step 2 ----X
 Step 3
   |
   v
 Payment
-
+```
 If security-sensitive steps can be skipped, this may indicate a business logic vulnerability.
 
 Race Condition
@@ -1440,7 +1440,7 @@ Race-condition testing should only be performed in an authorized testing environ
 ## Part 11: Practical Web Application Security Assessment Methodology
 
 A practical assessment can be organized into the following phases:
-
+```
 +----------------------------+
 | 1. Understand Scope        |
 +-------------+--------------+
@@ -1494,7 +1494,7 @@ A practical assessment can be organized into the following phases:
 +----------------------------+
 | 11. Document & Report     |
 +----------------------------+
-
+```
 ---
 
 ## Part 12: Quick Assessment Checklist
@@ -1614,7 +1614,7 @@ Business Logic
 ## Part 14: Authentication vs Authorization vs Session
 
 These three concepts are fundamental to web application security.
-
+```
 Authentication
       |
       | Who are you?
@@ -1635,7 +1635,7 @@ Session
       | remember you?
       v
 Authenticated Requests
-
+```
 Easy Memory Trick
 
 «Authentication = Who are you?»
@@ -1648,21 +1648,23 @@ Easy Memory Trick
 
 ## Part 15: Attack Surface to Vulnerability Mapping
 
-Functionality| Possible Security Testing
-Login| Brute Force, Enumeration, Authentication Bypass
-Registration| Account Enumeration, Input Validation
-Forgot Password| Token Issues, Account Takeover
-OTP| Brute Force, Reuse, Rate Limiting
-File Upload| File Upload Validation
-File Download| IDOR, Access Control
-Search| XSS, Injection
-Profile| IDOR, Authorization
-Payment| Price Manipulation, Business Logic
-Admin Panel| Privilege Escalation
-API| BOLA, Authentication, Authorization
-Session| Session Fixation, Session Hijacking
-Coupon| Coupon Abuse
-Transaction| Race Condition, Limit Bypass
+-Functionality| Possible Security Testing
+
+- Login| Brute Force, Enumeration, Authentication Bypass
+- Registration| Account Enumeration, Input Validation
+- Forgot Password| Token Issues, Account Takeover
+- OTP| Brute Force, Reuse, Rate Limiting
+- File Upload| File Upload Validation
+- File Download| IDOR, Access Control
+- Search| XSS, Injection
+- Profile| IDOR, Authorization
+- Payment| Price Manipulation, Business Logic
+- Admin Panel| Privilege Escalation
+- API| BOLA, Authentication, Authorization
+- Session| Session Fixation, Session Hijacking
+- Cookie| Cookie path set to root, Http only and Secure flag, Samesite
+- Coupon| Coupon Abuse
+- Transaction| Race Condition, Limit Bypass
 
 ---
 
@@ -1671,7 +1673,7 @@ Transaction| Race Condition, Limit Bypass
 A good web application security assessment is not only about running automated scanners.
 
 A security tester should understand:
-
+```
 Application
      |
      v
@@ -1700,7 +1702,7 @@ Manual Validation
      |
      v
 Reporting
-
+```
 The most important mindset is:
 
 «Understand the application before trying to break it.»
@@ -1712,7 +1714,7 @@ Security tools can help identify and analyze technical behavior, but they cannot
 ## Part 17: Simple Assessment Mindset
 
 Remember these seven words:
-
+```
 UNDERSTAND
      |
      v
@@ -1732,7 +1734,7 @@ VALIDATE
      |
      v
 REPORT
-
+```
 Understand
 
 Understand the application's architecture, functionality, roles, and business workflow.
@@ -1776,7 +1778,7 @@ Document the vulnerability with:
 ## Part 18: Final Reminder
 
 Web application security assessment is a combination of:
-
+```
 Technical Knowledge
         +
 Application Understanding
@@ -1788,7 +1790,7 @@ Business Logic Understanding
 Manual Analysis
         +
 Proper Reporting
-
+```
 Tools such as Burp Suite are extremely useful for understanding application behavior, but tools alone cannot replace a security tester's analysis.
 
 The goal is not simply to find vulnerabilities.
