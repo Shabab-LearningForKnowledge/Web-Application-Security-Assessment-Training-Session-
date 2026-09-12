@@ -1708,7 +1708,7 @@ Security tools can help identify and analyze technical behavior, but they cannot
 
 ---
 
-Part 17: Simple Assessment Mindset
+## Part 17: Simple Assessment Mindset
 
 Remember these seven words:
 
@@ -1772,7 +1772,7 @@ Document the vulnerability with:
 
 ---
 
-Part 18: Final Reminder
+## Part 18: Final Reminder
 
 Web application security assessment is a combination of:
 
