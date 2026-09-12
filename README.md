@@ -39,7 +39,7 @@ A typical web application may contain:
 - Cache and storage services
 
 Basic Web Application Architecture
-
+```
 +------------------+
 |      User        |
 |     Browser      |
@@ -64,6 +64,7 @@ Basic Web Application Architecture
 | MySQL/PostgreSQL |
 | MSSQL/MongoDB    |
 +------------------+
+```
 
 Presentation Layer
 
