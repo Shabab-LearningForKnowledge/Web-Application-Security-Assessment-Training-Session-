@@ -243,7 +243,7 @@ Therefore, understanding the architecture is an important first step in a securi
 
 ---
 
-Part 2: Attack Surface and Attack Vector
+## Part 2: Attack Surface and Attack Vector
 
 What Is an Attack Surface?
 
