@@ -17,7 +17,7 @@ The main objective of a security assessment is to understand:
 - Whether business rules can be bypassed
 - Whether sensitive information can be accessed without proper authorization
 
-«Important: Security testing should only be performed on applications and systems for which you have explicit authorization.»
+« Important: Security testing should only be performed on applications and systems for which you have explicit authorization. »
 
 ---
 
